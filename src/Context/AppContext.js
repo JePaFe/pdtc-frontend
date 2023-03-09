@@ -6,6 +6,11 @@ export const Context = createContext();
 
 const AppContext = ({ children }) => {
   const [authors, setAuthors] = useState([]);
+  const [authorValues, setAuthorValues] = useState({
+    name: "",
+    lastName: "",
+    alive: "",
+  });
 
   const getAuthors = async () => {
     try {
@@ -22,7 +27,13 @@ const AppContext = ({ children }) => {
     getAuthors();
   }, []);
 
-  return <Context.Provider value={{ authors }}>{children}</Context.Provider>;
+  return (
+    <Context.Provider
+      value={{ authors, setAuthors, authorValues, setAuthorValues }}
+    >
+      {children}
+    </Context.Provider>
+  );
 };
 
 export default AppContext;
